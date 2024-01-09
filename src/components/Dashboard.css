@@ -1,0 +1,21 @@
+
+
+.profile{
+  display: flex;
+}
+#userImage{
+  height: 10rem;
+  border-radius: 50%;
+}
+.main{
+  position: relative;
+  margin-left: 25rem;
+
+}
+.edit-profile{
+  height: 30px;
+ margin: 0.5rem;
+  background: rgb(237, 237, 237);
+  padding: 0;
+  width: 100px;
+}
