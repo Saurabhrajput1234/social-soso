@@ -17,7 +17,7 @@ const PostList = () => {
      {fetching && <LoadingSpinner/>} 
      {!fetching && postList.length === 0 && <WellcomeMassage />}
      {!fetching && postList.map((post)=>(
-      <PostContent key = {post.id} post= {post}/>
+      <PostContent key = {post.id} post={post}/>
      ))}
       
     </div>

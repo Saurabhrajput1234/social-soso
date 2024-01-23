@@ -19,11 +19,11 @@ const CreatePost = () => {
   const reactions = reactionsElement.current.value;
   const tags = tagsElement.current.value.split('');
 
-//   userIdElement.current.value="";
-//  postTitleElement.current.value="";
-//   postBodyElement.current.value="";
-//  tagsElement.current.value="";
-//  reactionsElement.current.value="";
+  userIdElement.current.value="";
+ postTitleElement.current.value="";
+  postBodyElement.current.value="";
+ tagsElement.current.value="";
+ reactionsElement.current.value="";
 
 
  

@@ -1,56 +1,60 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect ,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from './contextProvider/ContextProvider';
-// import userImage from './images/saurabh1.jpg';
+import userImage from './images/saurabh1.jpg';
 import "./Dashboard.css";
+import LoadingSpinner from './LoadingSpinner';
 
 
 const Dashboard = () => {
-   //context
-  //  const{logindata,setLoginData}=useContext(LoginContext);
-  //  console.log(logindata);
+   const{loginData,setLoginData}=useContext(LoginContext);
+
+  const[recievedData,setRecievedData]=useState(true)
+   
 
 
-  // const history = useNavigate();
+  const history = useNavigate();
 
-  // const DashboardValid = async()=>{
-  //   let token = localStorage.getItem("usersdatatoken");
-  //   // console.log(token)
-  //   const res = await fetch("/validuser",{
-  //     method:"GET",
-  //     headers:{
-  //       "Content-Type":"application/json",
-  //       "Authorization" : token
-  //     }
-  //   });
-  //   const data = await res.json();
+  const DashboardValid = async()=>{
+    let token = localStorage.getItem("usersdatatoken");
+    const res = await fetch("/validuser",{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization" : token
+      }
+    });
+    const data = await res.json();
      
-  // if(data.status === 401 || !data){
-  //   history("*")
-  //   // console.log("error page redirect");
+  if(data.status === 401 || !data){
+    history("*")
+    // console.log("error page redirect");
 
-  // }
-  // else{
-  //   history("/dash")
-  //   setLoginData(data);
-  //   // console.log(data)
-  // }
+  }
+  else{
+    history("/dash")
+    setLoginData(data);
+    setRecievedData(false)
+    
+  }
 
-  // }
+  }
+  
 
-  // // useEffect(()=>{
-  // //   DashboardValid();
-  // },[])
+  useEffect(()=>{
+    setRecievedData(false)
+    DashboardValid();
+    setRecievedData(true)
+  },[])
   return (
-   <>
-   {/* <section className="main">
+   <>{ !recievedData &&  <section className="main">
 
    <div className="user">
     <div className="profile">
       <img id='userImage' src={userImage} alt="profile" />
       <div className="profile-Details">
       <div>
-        <span className="user-name">saurabhrajput828</span> <button className="edit-profile">Edit Profile</button>
+        <span className="user-name"><h3>{loginData.validUserOne.name}</h3></span> <button className="edit-profile">Edit Profile</button>
         <button className="edit-profile">View archive</button></div>
         <div>
           <span>9 posts</span>
@@ -58,12 +62,14 @@ const Dashboard = () => {
           <span>358 following</span>
         </div>
         <div>Saurabh Rajput</div>
-        <div>AKGEC</div>
+        <div><h6>{loginData.validUserOne.email}</h6></div>
       </div>
     </div>
    </div>
-   </section>
-    */}
+   </section>}
+   {recievedData && <LoadingSpinner/>}
+   
+   
    
 
    </>
