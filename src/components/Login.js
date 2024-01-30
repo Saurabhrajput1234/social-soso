@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./LoginForm.css";
 
 const Login = () => {
+  const apiUrl = process.env.REACT_APP_BACKEND_URL || 'https://social-soso-backend-1.onrender.com';
   const history = useNavigate();
   const [values,setValues] = useState({
     email: "",
@@ -35,7 +36,7 @@ const Login = () => {
    
     else 
     console.log("login successfully");
-    const data = await fetch("/login",{
+    const data = await fetch(`${apiUrl}/login`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Register.css";
 
 const Register = () => {
+  const apiUrl = process.env.REACT_APP_BACKEND_URL || 'https://social-soso-backend-1.onrender.com';
   const [passShow, setPassShow] = useState(false);
   const [values, setValues] = useState({
     name: "",
@@ -37,7 +38,7 @@ const Register = () => {
     else {
    
       
-     const data = await fetch("/register",{
+     const data = await fetch(`${apiUrl}/register`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
